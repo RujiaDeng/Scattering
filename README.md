@@ -17,7 +17,7 @@ Mitsuba为一基于物理模型的光学渲染软件，其官网为[Mitsuba](htt
 
 3. 基于最大后验估计的套索回归 
 
-见Python代码文件Lassoregression
+见Python代码文件Lassoregression，主函数为main函数
 
 ***
 有任何疑问请联系邮箱dengrj16@lzu.edu.cn
