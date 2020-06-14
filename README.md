@@ -3,7 +3,7 @@
 ## 输入数据
 Mitsuba仿真数据集与实际拍摄视频后续将上传至我的百度云盘
 
-Mitsuba为一基于物理模型的光学渲染软件，其官网为，包含下载和使用手册。
+Mitsuba为一基于物理模型的光学渲染软件，其官网为[Mitsuba](http://www.mitsuba-renderer.org/)
 
 ## 算法实现
 
