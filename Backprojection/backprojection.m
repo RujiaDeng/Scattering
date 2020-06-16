@@ -12,8 +12,8 @@ wpoints=8; %宽度x方向（列）采样点数
 hstep=floor((h-1)/(hpoints-1)); %行采样间隔行数
 wstep=floor((w-1)/(wpoints-1)); %列采样间隔列数
 
-% height=4; %散射层实际高度
-% width=8;  %散射层实际宽度
+% height=4; %散射层仿真高度
+% width=8;  %散射层仿真宽度
 height=8; %散射层实际高度
 width=16;  %散射层实际宽度
 
@@ -31,15 +31,17 @@ end
 X=X(:);
 Y=Y(:);
 P=P(:);
+ 
+% length=4; %仿真系统中，z的界为0到4
+length=8; %实际系统中，z的界为0到8
 
 %剖分笛卡尔空间，每一体素为边长为0.1的正方体
-% step=0.1;%剖分间隔
-step=0.2;%剖分间隔
+% step=0.1;%仿真系统剖分间隔
+step=0.2;%实际系统剖分间隔
  D=step;
 
-length=8; %z的界为0到4
-
 W1=zeros(floor(width/step)*floor(height/step)*floor(length/step),1);%体素空间对应的weight矩阵
+%体素空间体素对应笛卡尔x,y,z坐标
 Z1=zeros(floor(width/step)*floor(height/step)*floor(length/step),1);
 Z2=zeros(floor(width/step)*floor(height/step)*floor(length/step),1);
 Z3=zeros(floor(width/step)*floor(height/step)*floor(length/step),1);
@@ -60,23 +62,31 @@ for i=1:floor(width/step)*floor(height/step)*floor(length/step)
     Z3(i)=(z1-1)*step+0.5*step;%coordinate of vk
 end
 
+%遍历采样点对
 for i=1:hpoints*wpoints
     for j=1:hpoints*wpoints
         if(j~=i)
             if(P(i)~=0)
+                %采样点p的x,y坐标
                 p=[X(i),Y(i)];
+                %采样点q的x,y坐标
                 q=[X(j),Y(j)];
                 c=nthroot(P(i)/P(j),3)^2;
+                %遍历体素空间
                 for k=1:floor(width/step)*floor(height/step)*floor(length/step)
+                    %计算曲面
+                    %计算体素到曲面对应球面的距离
                     if(c~=1)
                         x0=(q(1)-c*p(1))/(1-c);
                         y0=(q(2)-c*p(2))/(1-c);
                         R=sqrt(c*(p(1)-q(1))^2+c*(p(2)-q(2))^2)/(1-c);
                         d=abs(sqrt((Z1(k)-x0)^2+(Z2(k)-y0)^2+Z3(k)^2)-R);
                     end
+                    %计算体素到曲面对应平面的距离
                     if(c==1)
                         d=((p(1)-q(1))*Z1(k)+(p(2)-q(2))*Z2(k)+(q(1)^2+q(2)^2-c*p(1)^2-c*p(2)^2)*0.5)/sqrt((p(1)-q(1))^2+(p(2)-q(2))^2);
                     end
+                    %改对应体素的置信度
                     if(d<D)
                         W1(k)=W1(k)+1;
                     end
@@ -86,7 +96,7 @@ for i=1:hpoints*wpoints
     end
 end
 
-%四维向量w存放最大权值，最大权值体素点对应的实际笛卡尔坐标x,y,z（取体素中心点笛卡尔坐标替代）和下标x,y,z
+%四维向量w存放最大置信度，最大置信度体素点对应的实际笛卡尔坐标x,y,z（取体素中心点笛卡尔坐标替代）和下标
 w1=[0,0,0,0,0,0,0];
 for i=1:floor(width/step)*floor(height/step)*floor(length/step)
     if(W1(i)>w1(1))
@@ -100,8 +110,10 @@ for i=1:floor(width/step)*floor(height/step)*floor(length/step)
     end
 
 end
+%返回最大置信度体素坐标
 returnx=w1(2);
 returny=w1(3);
 returnz=w1(4);
 
+%算法重建用时
 toc
