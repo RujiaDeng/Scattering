@@ -3,6 +3,9 @@
 ## 输入数据
 Mitsuba仿真数据集与实际拍摄视频后续将上传至我的百度云盘
 
+链接：https://pan.baidu.com/s/1XNQ9y6ns75DTHT4nEpOACA 
+提取码：bz7z
+
 Mitsuba为基于物理模型的光学渲染软件，其官网为[Mitsuba](http://www.mitsuba-renderer.org/)
 
 ## 算法实现
