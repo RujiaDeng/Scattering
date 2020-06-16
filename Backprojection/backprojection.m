@@ -14,8 +14,10 @@ wstep=floor((w-1)/(wpoints-1)); %列采样间隔列数
 
 % height=4; %散射层仿真高度
 % width=8;  %散射层仿真宽度
+% length=4; %仿真系统中，z的界为0到4
 height=8; %散射层实际高度
 width=16;  %散射层实际宽度
+length=8; %实际系统中，z的界为0到8
 
 X=zeros(hpoints,wpoints); %存放采样点的x坐标
 Y=zeros(hpoints,wpoints); %存放采样点的y坐标
@@ -31,9 +33,6 @@ end
 X=X(:);
 Y=Y(:);
 P=P(:);
- 
-% length=4; %仿真系统中，z的界为0到4
-length=8; %实际系统中，z的界为0到8
 
 %剖分笛卡尔空间，每一体素为边长为0.1的正方体
 % step=0.1;%仿真系统剖分间隔

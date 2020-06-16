@@ -115,7 +115,7 @@ end
 save([outfilepath,'realxtrans_XYZxyzerrorxyz.mat'],'X','Y','Z','x','y','z','error','errorx','errory','errorz');
 % load([outfilepath,'realxtrans_XYZxyzerrorxyz.mat']);
 
-%绘制三维x,y,z坐标分别关于时间的变化曲线
+%绘制三维x,y,z坐标分别关于时间的变化曲线(注意仿真数据中duration需替换为numFrames，坐标轴上下限也需改变)
 i=1:duration;
 figure;
 plot(i,X,'b-o','LineWidth',1.5);
