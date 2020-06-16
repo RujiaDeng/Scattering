@@ -2,15 +2,19 @@ clear all;
 close all;
 %输出结果文件路径
 outfilepath='C:\Users\Administrator\Desktop\毕业论文\20200527\20200527\反投影结果数据存档\';
-%用于存储重建x,y,z坐标与对应误差
-X=zeros(duration,1);
-Y=zeros(duration,1);
-Z=zeros(duration,1);
-errorx=zeros(duration,1);
-errory=zeros(duration,1);
-errorz=zeros(duration,1);
-error=zeros(duration,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%仿真系统%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%xtrans:
+% numFrames=80;
+%ytrans,ztrans:
+% numFrames=40;
+%用于存储重建x,y,z坐标与对应误差
+% X=zeros(numFrames,1);
+% Y=zeros(numFrames,1);
+% Z=zeros(numFrames,1);
+% errorx=zeros(numFrames,1);
+% errory=zeros(numFrames,1);
+% errorz=zeros(numFrames,1);
+% error=zeros(numFrames,1);
 % for i=1:numFrames
 %      fileName=sprintf('C:\Users\Administrator\Desktop\仿真数据\Xtransm\Xtransm_%03d',i-1);
 %      run([fileName,'.m']);
@@ -33,7 +37,7 @@ error=zeros(duration,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%实际系统%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %参考真实运动轨迹，行表示时间(s)，列数为3，分别对应x,y,z坐标
 % xtransS:
-load(['C:\Users\Administrator\Desktop\888\xtransS.mat']);
+load(['C:\Users\Administrator\Desktop\毕业论文\20200527\20200527\888\xtransS.mat']);
 % % % %xtransM:
 % load(['C:\Users\Administrator\Desktop\888\xtransM.mat']);
 % % % %xtransL:
@@ -46,14 +50,14 @@ load(['C:\Users\Administrator\Desktop\888\xtransS.mat']);
 % % % % load(['C:\Users\Administrator\Desktop\888\ztransL.mat']);
 % % % %ytransM:
 % % load(['C:\Users\Administrator\Desktop\888\ytransM.mat']);
-% x=source(:,1);
-% y=source(:,2);
-% z=source(:,3);
+x=source(:,1);
+y=source(:,2);
+z=source(:,3);
 %预处理后视频文件路径及其起止时间
 % %xtransS:
 % filename=['C:\Users\Administrator\Desktop\888\MAH00956_after.avi']; 
 % %xtransM:
-filename=['C:\Users\Administrator\Desktop\888\MAH00958_after.avi']; 
+filename=['C:\Users\Administrator\Desktop\毕业论文\20200527\20200527\888\MAH00958_after.avi']; 
 % %xtransL:
 % filename=['C:\Users\Administrator\Desktop\888\MAH00959_after.avi']; 
 % %ztransS:
@@ -88,7 +92,14 @@ duration=40;
 % %ytrans
 % startime=24; %开始运动时间
 % duration=26; 
-
+%用于存储重建x,y,z坐标与对应误差
+X=zeros(duration,1);
+Y=zeros(duration,1);
+Z=zeros(duration,1);
+errorx=zeros(duration,1);
+errory=zeros(duration,1);
+errorz=zeros(duration,1);
+error=zeros(duration,1);
 for i=1:duration
     i
     data=im2double(read(obj,startime+(i-1)));
