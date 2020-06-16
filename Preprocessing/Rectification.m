@@ -1,12 +1,3 @@
-% clear all;
-% close all;
-% clc;
-% 
-% img= im2double(imread('G:\我的实验数据\1.png'));
-% imshow(img)
-% img= rgb2gray(img);
-% % imshow(mat2gray(img));
-
 function [imgn]=Rectification(img,dot)
 [M,N] = size(img);
 w=round(sqrt((dot(1,1)-dot(2,1))^2+(dot(1,2)-dot(2,2))^2));     %从原四边形获得新矩形宽
